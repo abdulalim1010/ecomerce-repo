@@ -2,6 +2,8 @@ const handleAddtoCart = () => {
  const productName=document.getElementById("productName") 
 
   const productQuantity = document.getElementById("productquantity")
+
+  
   const name = productName.value;
   const quantity = productQuantity.value;
    handleSetlocalStorage(name,quantity)
