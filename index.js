@@ -6,7 +6,7 @@ const handleAddtoCart = () => {
   
   const name = productName.value;
   const quantity = productQuantity.value;
-   handleSetlocalStorage(name,quantity)
+  savproductFromlocalstorage(name,quantity)
   displayProduct(name, quantity)
  
   productName.value=""
@@ -25,10 +25,28 @@ const displayProduct = (productName ,quantity) => {
 
   
 }
-const handleSetlocalStorage = (productName, quantity) => {
-  
-  const newProduct = {
-    name, quantity
-  };
-  localStorage.setItem("cart", JSON.stringify(newProduct))
+
+const getProductFromLocalstorage = ()=>{
+  let cart = {};
+  const getproduct = localStorage.getItem("cart");
+  if (getproduct) {
+    cart=JSON.parse(getproduct)
+  }
+  return cart;
+
+}
+const displayproductfromlocalstorage = () => {
+  const products = getProductFromLocalstorage()
+  for (const prduct in products) {
+    displayProduct(prduct,products[prduct])
+      
+
+  }
+}
+
+const savproductFromlocalstorage = (productName, quantity) => {
+  const cart=getProductFromLocalstorage()
+  cart[productName] = quantity;
+  const cartstring=JSON.stringify(cart)
+  localStorage.setItem("cart",cartstring)
 }
